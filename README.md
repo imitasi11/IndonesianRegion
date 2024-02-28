@@ -1,52 +1,48 @@
-API Data Wilayah Indonesia
-==========================
+API Data for Indonesian Regions
 
-Repository ini berisi source code untuk generate (REST) API statis berisi data wilayah Indonesia
-serta perintah untuk mendeploynya ke _static hosting_ [Github Page](https://pages.github.com/).
+This repository contains the source code to generate a static (REST) API containing data for Indonesian regions and commands to deploy it to static hosting Github Page.
 
-Demo: [https://emsifa.github.io/api-wilayah-indonesia](https://emsifa.github.io/api-wilayah-indonesia)
+Demo: https://emsifa.github.io/api-wilayah-indonesia
+What is meant by a static API?
 
-#### Apa yang dimaksud API statis? 
+A static API is an API whose endpoints consist of static files.
+Advantages of a static API?
 
-API statis adalah API yang _endpoint_-nya terdiri dari file statis.
+Can be hosted on static file hosting services such as Github Page, Netlify, etc.
+Faster process because it does not require server-side scripting.
 
-#### Keuntungan API statis?
+How does it work?
 
-* Dapat dihosting pada _static file hosting_ seperti Github Page, Netlify, dsb.
-* Proses lebih cepat karena tidak membutuhkan server-side scripting.
+Lists of provinces, districts/cities, districts, and villages are stored in the data folder in CSV files (for easy editing).
+Then the generate.php script is executed. This script will read the CSV files inside the data folder and then generate thousands of endpoints (files) into the static/api folder.
+The API is ready to be served.
 
-#### Bagaimana cara kerjanya?
+I want to host it on my own Github, how can I do that?
 
-* Daftar provinsi, kab/kota, kecamatan, kelurahan/desa disimpan pada folder `data` berupa file `csv` (agar mudah diedit).
-* Kemudian script `generate.php` dijalankan. Script ini akan membaca file `csv` didalam folder `data`, kemudian men-generate ribuan endpoint (file) kedalam folder `static/api`.
-* API siap 'dihidangkan'.
-
-#### Saya mau hosting di Github saya sendiri, bagaimana caranya?
-
-* Klik fork di pojok kanan atas.
-* Pada halaman forking, **HAPUS CENTANG** "Copy the master branch only".
-* Klik "Create Fork".
-* Setelah selesai di Fork, klik Settings (bukan setting account, tapi setting repository).
-* Klik menu "Pages" untuk masuk ke menu pengaturan GitHub Pages.
-* Pada menu pengaturan GitHub Pages:
-  * Pilih Source: Deploy from a Branch
-  * Branch: `gh-pages`
-  * Direktori: `/root`
-  * Klik Save
-* Tunggu beberapa menit (5-10 menitan), kembali ke halaman home repository (https://github.com/usernamekamu/api-wilayah-indonesia).
-* Kalau halaman sudah terdeploy, di bagian kanan halaman, akan muncul informasi "Environments". Kalau belum tunggu lagi beberapa menit, lalu refresh.
-* Kalau sudah muncul informasi Environmentsnya, klik bagian "🚀 github-pages".
-* Di halaman Deployments, klik "View Deployment" untuk melihat halaman yang berhasil terdeploy.
+Click fork in the top right corner.
+On the forking page, UNCHECK "Copy the master branch only".
+Click "Create Fork".
+After forking is done, click Settings (not account settings, but repository settings).
+Click the "Pages" menu to enter the GitHub Pages settings menu.
+In the GitHub Pages settings menu:
+  Choose Source: Deploy from a Branch
+  Branch: gh-pages
+  Directory: /root
+  Click Save
+Wait a few minutes (5-10 minutes), go back to the repository's home page (https://github.com/yourusername/api-wilayah-indonesia).
+If the page has been deployed, on the right side of the page, you will see "Environments" information. If not, wait a few more minutes, then refresh.
+Once the Environments information appears, click on "🚀 github-pages".
+On the Deployments page, click "View Deployment" to see the successfully deployed page.
 
 ## ENDPOINTS
 
-#### 1. Mengambil Daftar Provinsi
+#### 1. Get List of Provinces
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/provinces.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 [
@@ -62,19 +58,19 @@ Contoh Response:
 ]
 ```
 
-#### 2. Mengambil Daftar Kab/Kota pada Provinsi Tertentu
+#### 2. Get List of Districts/Cities in a Certain Province
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/regencies/{provinceId}.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/regencies/{provinceId}.json
 ```
 
-Contoh untuk mengambil daftar kab/kota di provinsi Aceh (ID = 11):
+Example to get a list of districts/cities in Aceh province (ID = 11)
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/regencies/11.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/regencies/11.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 [
@@ -92,19 +88,19 @@ Contoh Response:
 ]
 ```
 
-#### 3. Mengambil Daftar Kecamatan pada Kab/Kota Tertentu
+#### 3. Get List of Districts in a Certain District/City
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/districts/{regencyId}.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/districts/{regencyId}.json
 ```
 
-Contoh untuk mengambil daftar kecamatan di Aceh Selatan (ID = 1103):
+Example to get a list of districts in South Aceh (ID = 1103):
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/districts/1103.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/districts/1103.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 [
@@ -122,19 +118,19 @@ Contoh Response:
 ]
 ```
 
-#### 4. Mengambil Daftar Kelurahan pada Kecamatan Tertentu
+#### 4. Get List of Villages in a Certain District
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/villages/{districtId}.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/villages/{districtId}.json
 ```
 
-Contoh untuk mengambil daftar kelurahan di Trumon (ID = 1103010):
+Example to get a list of villages in Trumon (ID = 1103010):
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/villages/1103010.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/villages/1103010.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 [
@@ -152,19 +148,19 @@ Contoh Response:
 ]
 ```
 
-#### 5. Mengambil Data Provinsi berdasarkan ID Provinsi
+#### 5. Get Province Data based on Province ID
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/province/{provinceId}.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/province/{provinceId}.json
 ```
 
-Contoh untuk mengambil data provinsi Aceh (ID = 11):
+Example to get data for Aceh province (ID = 11):
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/province/11.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/province/11.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 {
@@ -173,19 +169,19 @@ Contoh Response:
 }
 ```
 
-#### 6. Mengambil Data Kab/Kota berdasarkan ID Kab/Kota
+#### 6. Get District/City Data based on District/City ID
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/regency/{regencyId}.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/regency/{regencyId}.json
 ```
 
-Contoh untuk mengambil data kabupaten Aceh Selatan (ID = 1103):
+Example to get data for South Aceh district (ID = 1103):
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/regency/1103.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/regency/1103.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 {
@@ -195,19 +191,19 @@ Contoh Response:
 }
 ```
 
-#### 7. Mengambil Data Kecamatan berdasarkan ID Kecamatan
+#### 7. Get District Data based on District ID
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/district/{districtId}.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/district/{districtId}.json
 ```
 
-Contoh untuk mengambil data kecamatan Trumon Timur (ID = 1103011):
+Example to get data for East Trumon district (ID = 1103011):
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/district/1103011.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/district/1103011.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 {
@@ -217,19 +213,19 @@ Contoh Response:
 }
 ```
 
-#### 8. Mengambil Data Kelurahan berdasarkan ID Kelurahan
+#### 8. Get Village Data based on Village ID
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/village/{villageId}.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/village/{villageId}.json
 ```
 
-Contoh untuk mengambil data kelurahan Jambo Dalem (ID = 1103011010):
+Example to get data for Jambo Dalem village (ID = 1103011010):
 
 ```
-GET https://emsifa.github.io/api-wilayah-indonesia/api/village/1103011010.json
+GET https://imitasi11.github.io/IndonesianRegion-API/static/api/village/1103011010.json
 ```
 
-Contoh Response:
+Example Response:
 
 ```
 {
@@ -239,10 +235,10 @@ Contoh Response:
 }
 ```
 
-## LIMITASI
+## LIMITATION
 
-Karena API ini dihosting di Github Page, Github Page sendiri memberikan batasan bandwith 100GB/bulan. Rata-rata endpoint disini memiliki ukuran 1KB/endpoint, jadi kurang lebih request yang dapat digunakan adalah 100.000.000 request per bulan, atau sekitar 3.000.000 request/hari.
+Since this API is hosted on Github Page, Github Page itself provides a bandwidth limit of 100GB/month. 
 
-Karena limitasi ini, disarankan untuk hosting API ini di github kamu sendiri.
+Because this limitation, its recomended to make your own github page -API.
 
-Untuk lebih detail tentang limitasi Github Page, bisa dilihat [disini](https://help.github.com/en/articles/about-github-pages#usage-limits).
+For more information you can check this(https://help.github.com/en/articles/about-github-pages#usage-limits).
