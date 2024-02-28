@@ -3,6 +3,8 @@ API Data for Indonesian Regions
 This repository contains the source code to generate a static (REST) API containing data for Indonesian regions and commands to deploy it to static hosting Github Page.
 
 Demo: https://emsifa.github.io/api-wilayah-indonesia
+
+
 What is meant by a static API?
 
 A static API is an API whose endpoints consist of static files.
